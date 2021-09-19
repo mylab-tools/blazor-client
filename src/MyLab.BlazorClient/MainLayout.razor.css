@@ -1,1 +1,29 @@
-﻿
+﻿.right-site {
+    min-height: 100vh;
+    background-color: #f3f3f4;
+}
+
+.left-site {
+    width: 280px;
+}
+
+.left-site a.nav-link {
+    color: #9a8ab5;
+}
+
+.left-site a.nav-link:hover {
+    color: lightgray;
+}
+
+.left-site a.nav-link.active {
+    color: lightgray;
+    background-color: #574181;
+}
+
+.header-item {
+    margin-left: 20px;
+}
+
+main {
+    margin-left: 0;
+}
