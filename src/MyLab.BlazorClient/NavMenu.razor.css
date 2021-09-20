@@ -1,0 +1,17 @@
+﻿sidebar {
+    width: 280px;
+    background: var(--mylab-accent-color)
+}
+
+.nav-item ::deep .nav-link {
+    color: var(--mylab-nav-link-color)
+}
+
+    .nav-item ::deep .nav-link:hover {
+        color: var(--mylab-nav-link-hover-color)
+    }
+
+    .nav-item ::deep .nav-link.active {
+        color: var(--mylab-nav-link-active-color);
+        background-color: transparent;
+    }

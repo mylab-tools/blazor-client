@@ -1,8 +1,4 @@
-﻿.body
-{
-    height: 100vh
-}
-
-p {
-    color: #b8bbc2;
+﻿.body {
+    height: 100vh;
+    background: var(--mylab-bg-color)
 }
