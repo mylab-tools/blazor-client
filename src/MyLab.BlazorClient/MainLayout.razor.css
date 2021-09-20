@@ -1,6 +1,6 @@
 ﻿.right-site {
     min-height: 100vh;
-    background-color: #f3f3f4;
+    background-color: #f4f7fa;
 }
 
 .left-site {
@@ -8,16 +8,23 @@
 }
 
 .left-site a.nav-link {
-    color: #9a8ab5;
+    color: #a9b1b9;
 }
 
 .left-site a.nav-link:hover {
-    color: lightgray;
+    color: #e2e5e8;
 }
 
 .left-site a.nav-link.active {
-    color: lightgray;
-    background-color: #574181;
+    color: #e2e5e8;
+}
+
+.nav-pills .nav-link.active {
+    background: none;
+}
+
+.content-area {
+    background: white
 }
 
 .header-item {
@@ -26,4 +33,12 @@
 
 main {
     margin-left: 0;
+}
+
+.text-regular {
+    color: #76818a;
+}
+
+.text-header {
+    color: #495057;
 }
