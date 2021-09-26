@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@using MyLab.BlazorClient.Model
+@inherits LayoutComponentBase
+@inject AppModel AppModel
 
 <div class="d-flex flex-row">
     
@@ -8,7 +10,7 @@
         <header class="border-bottom px-4 content-area">
             <nav class="navbar">
                 <div class="navbar-brand">
-                    My Favorit Portal
+                    @AppModel.Title
                 </div>
                 <div>
                     <dev class="header-item">John J.J.</dev>
@@ -38,6 +40,3 @@
         </footer>
     </div>
 </div>
-
-@code{
-}

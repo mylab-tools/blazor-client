@@ -7,11 +7,15 @@
     color: var(--mylab-nav-link-color)
 }
 
-    .nav-item ::deep .nav-link:hover {
-        color: var(--mylab-nav-link-hover-color)
-    }
+.nav-item ::deep .nav-link:hover {
+    color: var(--mylab-nav-link-hover-color)
+}
 
-    .nav-item ::deep .nav-link.active {
-        color: var(--mylab-nav-link-active-color);
-        background-color: transparent;
-    }
+.nav-item ::deep .nav-link.active {
+    color: var(--mylab-nav-link-active-color);
+    background-color: transparent;
+}
+
+.nav-icon-holder {
+    width: 20px;
+}

@@ -1,39 +1,31 @@
-﻿<sidebar class="d-flex flex-column flex-shrink-0 p-3 left-site">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        <span class="navbar-brand">Sidebar</span>
-    </a>
+﻿@using MyLab.BlazorClient.Model
+@inject AppModel AppModel
+
+<sidebar class="d-flex flex-column flex-shrink-0 left-site">
+    <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto ">
+        <a href="/" class="text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="navbar-brand">Sidebar</span>
+        </a>
+    </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <NavLink class="nav-link" href="fetchdata">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg> Home
-            </NavLink>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                Dashboard
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                Orders
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                Products
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                Customers
-            </a>
-        </li>
+        
+        @if (AppModel.Sections != null)
+        {
+            foreach (var appSection in AppModel.Sections)
+            {
+                <li class="nav-item p-2">
+                    <NavLink class="nav-link d-flex flex-row" href="@appSection.Ref">
+                        <div class="nav-icon-holder">
+                            <i class="fa fa-@appSection.IconId.Replace("fa-", "")"></i>
+                        </div>
+                        <div class="ms-2">@appSection.Title</div>
+                    </NavLink>
+                </li>        
+            }
+        }
+
     </ul>
 </sidebar>
 
