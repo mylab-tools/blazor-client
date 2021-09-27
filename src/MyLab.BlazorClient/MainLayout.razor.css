@@ -10,14 +10,3 @@
 .header-item {
     margin-left: 20px;
 }
-
-main {
-}
-
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    color: var(--mylab-text-header-color);
-}
-
-.navbar-brand {
-    color: var(--mylab-text-header-color);
-}
