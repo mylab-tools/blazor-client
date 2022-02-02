@@ -1,0 +1,208 @@
+﻿@using Microsoft.Extensions.Options
+@using MyLab.BlazorApp.Model
+@using MyLab.BlazorApp.Services
+@inherits LayoutComponentBase
+@inject IOptions<BlazorApp> _app
+@inject IUserService _userSrv
+
+@{
+    var app = _app.Value;
+    var user = _userSrv.ProvideCurrentUser();
+}
+
+<div class="ml-root ml-h100 d-flex flex-row">
+    <div class="ml-sidebar px-2">
+        <div class="d-flex flex-row justify-content-center ml-sidebar-header">
+            <a href="#" class="align-self-center" style="max-height: 70px">
+                @{
+                    var logoUrl = app.LogoUrl;
+                }
+                    <img src="@logoUrl" class="ml-logo" >
+            </a>
+        </div>
+        <hr class="ml-sidebar-border">
+        <div class="d-flex flex-column align-items-center py-4">
+            
+            @{
+                var userPicUrl = user.UserPicUrl;
+            }
+
+            <img src="@userPicUrl" class="rounded-circle ml-sidebar-user-icon mb-3">
+            <span class="ml-sidebar-username">@user.Name</span>
+
+            @if (user.Subtitles != null)
+            {
+                foreach (var subt in user.Subtitles)
+                {
+                    <span class="ml-sidebar-text-muted">@subt</span>
+                }
+            }
+
+            <div class="d-flex flex-row pt-4 align-self-stretch">
+
+                <div class="d-flex flex-column align-items-center flex-fill"></div>
+
+                @if (user.Gauges != null)
+                {
+                    foreach (var userGauge in user.Gauges)
+                    {
+                        var title = userGauge.Title;
+                        var faClass = userGauge.FaClass;
+
+                        <div class="d-flex flex-column align-items-center flex-fill" title="@title">
+                            <a href="#" class="fw-bold ml-sidebar-gauge-value">@userGauge.Value <i class="fas fa-@faClass"></i></a>
+
+                            @if (userGauge.AdditionLinkTitle != null)
+                            {
+                                var addLinkUrl = userGauge.AdditionLinkUrl;
+                                <a href="@addLinkUrl" class="ml-sidebar-balance-link ml-adv-link">@userGauge.AdditionLinkTitle</a>
+                            }
+                        </div>
+                        <div class="d-flex flex-column align-items-center flex-fill"></div>
+                    }
+                }
+            </div>
+        </div>
+        <hr class="ml-sidebar-border">
+        <ul class="ml-sidenav pt-5">
+            
+            @if (app?.SectionsGroups != null)
+            {
+                foreach (var sectionGroup in app.SectionsGroups)
+                {
+                    if (sectionGroup.Sections == null) continue;
+
+                    if (!string.IsNullOrEmpty(sectionGroup.Title))
+                    {
+                        <li class="ml-sidenav-item ml-sidenav-title">@sectionGroup.Title</li>
+                    }
+
+                    foreach (var section in sectionGroup.Sections)
+                    {
+                        var faClass = section.FaClass;
+                        var title = section.Title;
+                        var url = section.Url;
+
+                        <li class="ml-sidenav-item">
+                            <a href="@url">
+                                <i class="fas fa-@faClass"></i>@title
+                            </a>
+                        </li>
+                    }
+                }
+            }
+        </ul>
+    </div>
+    <main class="d-flex flex-column flex-fill">
+        <header>
+            <nav class="navbar navbar-light bg-light border-bottom ml-content-pane-header ps-4">
+                <div class="container-fluid ps-0">
+                    <h1 class="navbar-brand">@app.Title</h1>
+                    <div class="d-flex flex-row text-muted align-items-center">
+                        <span>@user.Name</span>
+                        <a href="#"><i class="fas fa-sign-out-alt mx-2 text-muted"></i></a>
+                    </div>
+                </div>
+            </nav>
+        </header>    
+        <div class="container ml-content-pane ps-4 pt-4 flex-grow-1">
+            @Body
+        </div>
+        <footer class="ml-footer bg-light ps-4 d-flex flex-row align-items-center">
+            <div class="container ps-0 ms-0">
+                <span class="text-muted">Copyright © 2022 — SomeOne</span>
+            </div>
+        </footer>
+    </main>
+    
+</div>
+
+<!--<div class="ml-h100 d-flex flex-row ml-root">
+        
+    <div class="ml-side-bar d-flex flex-column">
+        <div class="ml-header ml-side-bar-header">
+            <div class="d-flex flex-column ml-side-bar-header">
+                <a href="#" class="d-flex justify-content-center mt-3">
+                    <div class="ml-logo"/>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-column align-items-center py-4">
+            <img src="_content/MyLab.BlazorApp/img/user.png" class="rounded-circle ml-side-bar-user-icon mb-3">
+            <span class="ml-side-bar-username fw-bold">Проверяющий Тест Тестович</span>
+            <small>нотариус</small>
+            <small>палата серого региона</small>
+            <div class="d-flex flex-row pt-4">
+                <div class="d-flex flex-column me-5 align-items-center" title="Размер счёта">
+                    <a href="#" class="fw-bold ml-sidebar-gauge ">256 <i class="fas fa-ruble-sign"></i></a>
+                    <a href="#" class="ml-sidebar-balance-link">пополнить</a>
+                </div>
+                <div class="d-flex flex-column align-items-center" title="Использовано места в хранилище файлов">
+                    <a href="#"  class="fw-bold ml-sidebar-gauge">25% <i class="fas fa-hdd"></i></a>
+                </div>
+            </div>
+        </div>
+        <ul class="ml-side-nav pt-1">
+            
+            @if (app?.SectionsGroups != null)
+            {
+                foreach (var sectionGroup in app.SectionsGroups)
+                {
+                    if (sectionGroup.Sections == null) continue;
+
+                    if (sectionGroup.Title != null)
+                    {
+                        <li class="ml-side-nav-title">@sectionGroup.Title</li>
+                    }
+
+                    foreach (var section in sectionGroup.Sections)
+                    {
+                        var faClass = section.FaClass;
+                        var title = section.Title;
+                        var url = section.Url;
+
+                        <li class="ml-side-nav-link">
+                            <a href="@url">
+                                <i class="fas fa-@faClass"></i>@title
+                            </a>
+                        </li>
+                    }
+                }
+            }
+        </ul>
+    </div>
+    <div class="ml-main-wrapper ">
+        <div class="ml-main d-flex flex-column flex-fill">
+            <nav class="navbar ml-header ps-4 pe-4 ml-main-part">
+                <div class="d-flex flex-row ms-auto">
+                    <a href="#" class="ml-header-link" title="Уведомления"><i class="fas fa-lg fa-bell"></i></a>
+                    <a href="#" class="ml-header-link" title="Выход"><i class="fas fa-lg fa-sign-out-alt"></i></a>
+                </div>
+            </nav>
+            <div class="ml-content-header d-flex flex-column ps-4 ml-main-part">
+                <div>
+                    <h1 class="ml-header-title">@_app.Value.Title</h1>
+                </div>
+                <div>
+                    <a href="#" class="ml-content-header-link ml-adv-link">Сведения о банкростве</a> 
+                    <span class="ml-header-link-delimiter">/</span> 
+                    <a href="#" class="ml-content-header-link ml-adv-link">Документы</a>
+                </div>
+            </div>
+            <div class="ml-page-content-wrapper  ms-4 pt-0 me-4 d-flex flex-grow-1 ml-main-part d-flex flex-column">
+                <div class="d-flex flex-row ps-4 pt-3 pe-4 pb-3 align-items-center">
+                    <h2 class="ml-page-content-header mb-0">Сведения о банкротстве</h2>
+                </div>
+                <div class="container ms-0 ps-4 pb-4 pe-4">
+                    @Body
+                </div>
+            </div>
+            <footer class="ml-footer ps-4 pe-4 d-flex flex-row align-items-center ml-main-parts">
+                <div class="ps-0 ms-0 ms-auto">
+                    <span class="text-muted">Copyright © 2022 — Triasoft</span>
+                </div>
+            </footer>  
+        </div>
+    </div>
+    
+</div>-->
