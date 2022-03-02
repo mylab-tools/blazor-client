@@ -32,7 +32,7 @@ builder.Services.Configure<BlazorApp>(app =>
             Title = "Admin",
             Sections = new AppSection[]
             {
-                new() { Title = "Users", FaClass = "user", Url = "#"},
+                new() { Title = "Users", FaClass = "user", Url = "/users"},
                 new() { Title = "Admins", FaClass = "user-secret", Url = "#"},
                 new() { Title = "Bills", FaClass = "money-bill-alt", Url = "#"},
             }

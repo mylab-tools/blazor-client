@@ -1,6 +1,7 @@
 ﻿@using Microsoft.Extensions.Options
 @using MyLab.BlazorApp.Model
 @using MyLab.BlazorApp.Services
+
 @inherits LayoutComponentBase
 @inject IOptions<BlazorApp> _app
 @inject IUserService _userSrv
@@ -64,7 +65,7 @@
             </div>
         </div>
         <hr class="ml-sidebar-border">
-        <ul class="ml-sidenav pt-5">
+        <div class="d-flex flex-column ml-sidenav pt-5 align-items-stretch">
             
             @if (app?.SectionsGroups != null)
             {
@@ -74,24 +75,25 @@
 
                     if (!string.IsNullOrEmpty(sectionGroup.Title))
                     {
-                        <li class="ml-sidenav-item ml-sidenav-title">@sectionGroup.Title</li>
+                        <div class="ml-sidenav-item ml-sidenav-title d-flex flex-row">
+                            <span class="align-self-center">@sectionGroup.Title</span>
+                        </div>
                     }
-
+                    
                     foreach (var section in sectionGroup.Sections)
                     {
                         var faClass = section.FaClass;
                         var title = section.Title;
                         var url = section.Url;
-
-                        <li class="ml-sidenav-item">
-                            <a href="@url">
-                                <i class="fas fa-@faClass"></i>@title
-                            </a>
-                        </li>
+                        
+                        <NavLink href="@url" class="ml-sidenav-item d-flex flex-row">
+                            <i class="align-self-center fas fa-@faClass"></i>
+                            <span class="align-self-center">@title</span>
+                        </NavLink>
                     }
                 }
             }
-        </ul>
+        </div>
     </div>
     <main class="d-flex flex-column flex-fill">
         <header>
@@ -116,93 +118,3 @@
     </main>
     
 </div>
-
-<!--<div class="ml-h100 d-flex flex-row ml-root">
-        
-    <div class="ml-side-bar d-flex flex-column">
-        <div class="ml-header ml-side-bar-header">
-            <div class="d-flex flex-column ml-side-bar-header">
-                <a href="#" class="d-flex justify-content-center mt-3">
-                    <div class="ml-logo"/>
-                </a>
-            </div>
-        </div>
-        <div class="d-flex flex-column align-items-center py-4">
-            <img src="_content/MyLab.BlazorApp/img/user.png" class="rounded-circle ml-side-bar-user-icon mb-3">
-            <span class="ml-side-bar-username fw-bold">Проверяющий Тест Тестович</span>
-            <small>нотариус</small>
-            <small>палата серого региона</small>
-            <div class="d-flex flex-row pt-4">
-                <div class="d-flex flex-column me-5 align-items-center" title="Размер счёта">
-                    <a href="#" class="fw-bold ml-sidebar-gauge ">256 <i class="fas fa-ruble-sign"></i></a>
-                    <a href="#" class="ml-sidebar-balance-link">пополнить</a>
-                </div>
-                <div class="d-flex flex-column align-items-center" title="Использовано места в хранилище файлов">
-                    <a href="#"  class="fw-bold ml-sidebar-gauge">25% <i class="fas fa-hdd"></i></a>
-                </div>
-            </div>
-        </div>
-        <ul class="ml-side-nav pt-1">
-            
-            @if (app?.SectionsGroups != null)
-            {
-                foreach (var sectionGroup in app.SectionsGroups)
-                {
-                    if (sectionGroup.Sections == null) continue;
-
-                    if (sectionGroup.Title != null)
-                    {
-                        <li class="ml-side-nav-title">@sectionGroup.Title</li>
-                    }
-
-                    foreach (var section in sectionGroup.Sections)
-                    {
-                        var faClass = section.FaClass;
-                        var title = section.Title;
-                        var url = section.Url;
-
-                        <li class="ml-side-nav-link">
-                            <a href="@url">
-                                <i class="fas fa-@faClass"></i>@title
-                            </a>
-                        </li>
-                    }
-                }
-            }
-        </ul>
-    </div>
-    <div class="ml-main-wrapper ">
-        <div class="ml-main d-flex flex-column flex-fill">
-            <nav class="navbar ml-header ps-4 pe-4 ml-main-part">
-                <div class="d-flex flex-row ms-auto">
-                    <a href="#" class="ml-header-link" title="Уведомления"><i class="fas fa-lg fa-bell"></i></a>
-                    <a href="#" class="ml-header-link" title="Выход"><i class="fas fa-lg fa-sign-out-alt"></i></a>
-                </div>
-            </nav>
-            <div class="ml-content-header d-flex flex-column ps-4 ml-main-part">
-                <div>
-                    <h1 class="ml-header-title">@_app.Value.Title</h1>
-                </div>
-                <div>
-                    <a href="#" class="ml-content-header-link ml-adv-link">Сведения о банкростве</a> 
-                    <span class="ml-header-link-delimiter">/</span> 
-                    <a href="#" class="ml-content-header-link ml-adv-link">Документы</a>
-                </div>
-            </div>
-            <div class="ml-page-content-wrapper  ms-4 pt-0 me-4 d-flex flex-grow-1 ml-main-part d-flex flex-column">
-                <div class="d-flex flex-row ps-4 pt-3 pe-4 pb-3 align-items-center">
-                    <h2 class="ml-page-content-header mb-0">Сведения о банкротстве</h2>
-                </div>
-                <div class="container ms-0 ps-4 pb-4 pe-4">
-                    @Body
-                </div>
-            </div>
-            <footer class="ml-footer ps-4 pe-4 d-flex flex-row align-items-center ml-main-parts">
-                <div class="ps-0 ms-0 ms-auto">
-                    <span class="text-muted">Copyright © 2022 — Triasoft</span>
-                </div>
-            </footer>  
-        </div>
-    </div>
-    
-</div>-->

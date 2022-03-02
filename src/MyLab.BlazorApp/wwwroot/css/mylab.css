@@ -6,6 +6,8 @@
     --ml-sidebar-bg-color: #1f4875;
     --ml-sidebar-low-color: #8399b2;
     --ml-sidebar-low-hover-color: #abc1da;
+    --ml-sidenav-item-active-bg-color: #275a91;
+    --ml-active-link-color: #f26522;
     --ml-logo-w: 0;
     --ml-logo-h: 0;
     --ml-logo-url: url("");
@@ -44,12 +46,12 @@
     }
 
 .ml-sidebar-balance-link {
-    color: #f26522;
+    color: var(--ml-active-link-color);
     font-size: .8rem;
 }
 
     .ml-sidebar-balance-link:hover {
-        color: #f26522;
+        color: var(--ml-active-link-color);
     }
 
 .ml-sidebar-gauge-value {
@@ -79,29 +81,31 @@
 
 .ml-sidenav {
     list-style-type: none;
-    padding-inline-start: 20px;
 }
 
 .ml-sidenav-item {
     color: var(--ml-sidebar-low-color);
-    padding-bottom: 20px;
     font-size: .9375rem;
-    margin-left: 10px;
+    padding-left: 30px;
+    min-height: 45px;
 }
 
-    .ml-sidenav-item > a {
-        text-decoration: none;
-        color: inherit;
-    }
+a.ml-sidenav-item.active {
+    background: var(--ml-sidenav-item-active-bg-color);
+}
 
-        .ml-sidenav-item > a > i {
-            margin-right: 10px;
-        }
+a.ml-sidenav-item {
+    text-decoration: none;
+}
 
-        .ml-sidenav-item > a:hover {
-            text-decoration: none;
-            color: var(--ml-sidebar-low-hover-color);
-        }
+a.ml-sidenav-item > i {
+    margin-right: 10px;
+}
+
+a.ml-sidenav-item:hover {
+    text-decoration: none;
+    color: var(--ml-sidebar-low-hover-color);
+}
 
 .ml-sidenav-title {
     text-transform: uppercase;
